@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="turtleFacts">
+<head>
+<link rel="stylesheet" href="bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>Employee Profiler</title>
+<script src="angular.min.js"></script>
+<script src="jquery-1.11.3.min.js "></script>
+<script src="bootstrap.min.js "></script>
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1>Employee Profiler</h1>
+		<h3>List Of Highly Qualified Employees from the world</h3>
+	</div>
+	
+	<div ng-controller="listCtrl as list" ng-hide="list.quizActive">
+		
+		<form class="form-inline well well-sm clearfix">
+		<img src="searchicon.png">
+		<input type="text" placeholder="Search..." class="form-control" ng-model="list.search">
+		</form>
+		
+		<div class="row">
+			<div class="col-sm-6" ng-repeat="emp in list.names | filter:list.search">
+				<div class="well well-sm">
+					<div class="row">
+						<div class="col-md-5">
+							<img src="img_avatar.png" class="img-rounded img-responsive well-image">
+						</div>
+						<div class="col-md-7">
+							<h2>{{emp.name()}}</h2>	
+							<p><strong>Age: </strong>{{emp.age}}</p>
+							<p><strong>Cell: </strong>{{emp.mobile}}</p>
+							<p><strong>Salary: </strong>{{emp.salary}}</p>
+							<p><strong>Company: </strong>{{emp.companay}}</p>
+							<p><strong>Description: </strong>{{emp.desc}}</p>
+							<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#emp-info" ng-click="list.changeActiveEmp(emp)">More Info</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal" id="emp-info">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2>{{list.activeEmp.name()}}</h2>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-xs-8 col-xs-offset-2">
+								<img src="../img_avatar.png" class="img-rounded img-responsive">
+							</div>
+						</div>
+						<div class="row top-buffer">
+							<div class="col-md-8">
+								<p><strong>Age: </strong>{{list.activeEmp.age}}</p>
+								<p><strong>Cell: </strong>{{list.activeEmp.mobile}}</p>
+								<p><strong>Salary: </strong>{{list.activeEmp.salary}}</p>
+								<p><strong>Company: </strong>{{list.activeEmp.companay}}</p>
+								<p><strong>Description: </strong>{{list.activeEmp.desc}}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<button class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div ng-controller="quizCtrl as quiz" ng-show="">
+	</div>
+</div>
+</body>
+<script src="prog.js"></script>
+<script src="controller.js"></script>
+</html>
